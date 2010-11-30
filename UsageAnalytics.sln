@@ -5,14 +5,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UsageAnalytics", "UsageAnal
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Win32 = Debug|Win32
-		Release|Win32 = Release|Win32
+		Unicode Debug|Win32 = Unicode Debug|Win32
+		Unicode Release|Win32 = Unicode Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5F7C5A3B-FDF8-4EA1-81A7-8A8BAF15F34A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{5F7C5A3B-FDF8-4EA1-81A7-8A8BAF15F34A}.Debug|Win32.Build.0 = Debug|Win32
-		{5F7C5A3B-FDF8-4EA1-81A7-8A8BAF15F34A}.Release|Win32.ActiveCfg = Release|Win32
-		{5F7C5A3B-FDF8-4EA1-81A7-8A8BAF15F34A}.Release|Win32.Build.0 = Release|Win32
+		{5F7C5A3B-FDF8-4EA1-81A7-8A8BAF15F34A}.Unicode Debug|Win32.ActiveCfg = Unicode Debug|Win32
+		{5F7C5A3B-FDF8-4EA1-81A7-8A8BAF15F34A}.Unicode Debug|Win32.Build.0 = Unicode Debug|Win32
+		{5F7C5A3B-FDF8-4EA1-81A7-8A8BAF15F34A}.Unicode Release|Win32.ActiveCfg = Unicode Release|Win32
+		{5F7C5A3B-FDF8-4EA1-81A7-8A8BAF15F34A}.Unicode Release|Win32.Build.0 = Unicode Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
