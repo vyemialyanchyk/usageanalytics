@@ -19,17 +19,9 @@ class ITracker
 {
 public:
 	virtual ~ITracker() {};
-	// Track the focusPoint in the application synchronously. <br/>
-	// <red><b>Please be cognizant while using this method. Since, it would have
-	// a peformance hit on the actual application. Use it unless it's really
-	// needed</b></red>
+	// Track the focusPoint in the application. <br/>
 	// @param focusPoint
 	//            Focus point of the application like application load,
 	//            application module load, user actions, error events etc.
-	virtual void trackSynchronously( IFocusPoint* focusPoint ) = 0;
-	// Track the focusPoint in the application asynchronously. <br/>
-	// @param focusPoint
-	//            Focus point of the application like application load,
-	//            application module load, user actions, error events etc.
-	virtual void trackAsynchronously( IFocusPoint* focusPoint ) = 0;
+	virtual void trackFocusPoint( IFocusPoint* focusPoint ) = 0;
 };

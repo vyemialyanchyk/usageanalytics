@@ -30,11 +30,11 @@ UsageReport::UsageReport()
 	m_pStopKaEnvironment = CUsageActivator::getInstance().getStopKaEnvironment();
 	m_pApplicationEnvironment = CUsageActivator::getInstance().getApplicationEnvironment();
 	m_pGoogleAnalyticsParameters = CUsageActivator::getInstance().getGoogleAnalyticsParameters();
-	m_pFocusPoint = new SuffixFocusPoint( _T("tools"), m_pStopKaEnvironment->getStopKaVersion() );
+	m_pFocusPoint = new SuffixFocusPoint( _T("StopKa"), m_pStopKaEnvironment->getStopKaVersion() );
 	IFocusPoint* pFocusPoint = 0;
-	pFocusPoint = m_pFocusPoint->setChild( new FocusPoint( _T("usage") ) );
-	pFocusPoint = pFocusPoint->setChild( new FocusPoint( _T("action") ) );
-	pFocusPoint = pFocusPoint->setChild( new FocusPoint( _T("wsstartup") ) );
+	pFocusPoint = m_pFocusPoint->setChild( new FocusPoint( _T("usageanalytics") ) );
+	pFocusPoint = pFocusPoint->setChild( new FocusPoint( _T("test") ) );
+	pFocusPoint = pFocusPoint->setChild( new FocusPoint( _T("startup") ) );
 }
 
 UsageReport::~UsageReport()
@@ -47,8 +47,7 @@ void UsageReport::doReport()
 {
 	IURLBuildingStrategy* pUrlBuildingStrategy = new GoogleAnalyticsUrlStrategy( m_pGoogleAnalyticsParameters );
 	ITracker* pTracker = new Tracker( pUrlBuildingStrategy, m_pGoogleAnalyticsParameters->getUserAgent() );
-	pTracker->trackAsynchronously( m_pFocusPoint );
-	// TODO: при асинхронном вызове освобождать по другому
+	pTracker->trackFocusPoint( m_pFocusPoint );
 	delete pTracker;
 	delete pUrlBuildingStrategy;
 }
