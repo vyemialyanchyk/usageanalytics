@@ -37,29 +37,30 @@ String CApplicationUserAgent::createBrowserLanguage()
 	String nl = getNL();
 	if( nl.length() == 0 )
 	{
-		return _T("en");
+		nl = _T("zz-ZZ");
 	}
-	String builder( _T("en") );
-	/** /
-	int indexOf = nl.indexOf( JAVA_LOCALE_DELIMITER );
-	if( indexOf <= 0 )
+	size_t nPlace = nl.find( JAVA_LOCALE_DELIMITER, 0 );
+	if( nPlace != String::npos )
 	{
-		return nl;
+		nl.replace( nPlace, 1, &BROWSER_LOCALE_DELIMITER );
 	}
-	builder += nl.substring(0, indexOf);
-	builder += BROWSER_LOCALE_DELIMITER;
-	builder += nl.substring(indexOf + 1);
-	/**/
-	return builder;
+	return nl;
 }
 
 String CApplicationUserAgent::getNL()
 {
-	_locale_t loc = _get_current_locale();
-	// TODO
-	::GetThreadLocale();
-	//return Platform.getNL();
-	return _T("en");
+	const size_t n = 1024;
+	String strLocaleName;
+	strLocaleName.reserve( n );
+	strLocaleName.resize( n );
+	int i = 0;
+	if( i = ::GetUserDefaultLocaleName( const_cast<CharType*>( strLocaleName.c_str() ), n ) )
+	{
+		strLocaleName.resize( i );
+		return strLocaleName;
+	}
+	// return undef locale by default
+	return _T("zz-ZZ");
 }
 
 String CApplicationUserAgent::getBrowserLanguage()
@@ -108,8 +109,6 @@ String CApplicationUserAgent::getOSVersion()
 	ZeroMemory( &osvi, sizeof(OSVERSIONINFO) );
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
 	::GetVersionEx( &osvi );
-	//CharType buff[ 1024 ];
-	//ZeroMemory( buff, 1024 * sizeof(CharType) );
 	const size_t n = 1024;
 	String res;
 	res.reserve( n );
@@ -137,6 +136,6 @@ String CApplicationUserAgent::getApplicationName()
 
 String CApplicationUserAgent::getApplicationVersion()
 {
-	// TODO: получать версию из одного места
+	// TODO: get application version from one place
 	return _T("1.5");
 }

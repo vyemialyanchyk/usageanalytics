@@ -31,9 +31,7 @@ public:
 	Tracker( IURLBuildingStrategy* pUrlBuildingStrategy, const String& userAgent );
 	virtual ~Tracker();
 
-	void trackSynchronously( IFocusPoint* pFocusPoint );
-
-	void trackAsynchronously( IFocusPoint* pFocusPoint );
+	void trackFocusPoint( IFocusPoint* pFocusPoint );
 
 	String getTrackingUrl( IFocusPoint* pFocusPoint );
 };

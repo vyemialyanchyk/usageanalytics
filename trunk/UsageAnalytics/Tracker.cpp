@@ -36,12 +36,7 @@ Tracker::~Tracker()
 	}
 }
 
-void Tracker::trackSynchronously( IFocusPoint* pFocusPoint )
-{
-	m_pHttpRequest->request( getTrackingUrl( pFocusPoint ) );
-}
-
-void Tracker::trackAsynchronously( IFocusPoint* pFocusPoint )
+void Tracker::trackFocusPoint( IFocusPoint* pFocusPoint )
 {
 	m_pHttpRequest->request( getTrackingUrl( pFocusPoint ) );
 }
