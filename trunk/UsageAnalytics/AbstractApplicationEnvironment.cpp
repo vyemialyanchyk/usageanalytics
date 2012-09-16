@@ -67,15 +67,15 @@ void AbstractApplicationEnvironment::initScreenSettings()
 	unsigned int nWidth = ::GetDeviceCaps( hDC, HORZRES ); //horizontal resolution
 	unsigned int nHeight = ::GetDeviceCaps( hDC, VERTRES ); //vertical resolution
 	unsigned int n = ::GetDeviceCaps( hDC, BITSPIXEL ) * ::GetDeviceCaps( hDC, PLANES );
-	m_screenColorDepth = UIntToString( n ) + SCREENCOLORDEPTH_POSTFIX;
+	m_screenColorDepth = UIntToString_( n ) + SCREENCOLORDEPTH_POSTFIX;
 	::ReleaseDC( hWnd, hDC );
-	m_screenResolution = UIntToString( nWidth ) + SCREERESOLUTION_DELIMITER + UIntToString( nHeight );
+	m_screenResolution = UIntToString_( nWidth ) + SCREERESOLUTION_DELIMITER + UIntToString_( nHeight );
 }
 
 void AbstractApplicationEnvironment::initVisits()
 {
 	clock_t nTime = clock();
-	String currentTime = UIntToString( nTime );
+	String currentTime = UIntToString_( nTime );
 	m_currentVisit = currentTime;
 	m_firstVisit = m_pPreferences->get( IUsageReportPreferenceConstants::FIRST_VISIT, _T("") );
 	if( m_firstVisit.length() == 0 )
@@ -125,10 +125,10 @@ String AbstractApplicationEnvironment::getUserId()
 String AbstractApplicationEnvironment::createIdentifier()
 {
 	String builder;
-	String randStr = UIntToString( rand() );
+	String randStr = UIntToString_( rand() );
 	builder += randStr;
 	clock_t nTime = clock();
-	String currentTime = UIntToString( nTime );
+	String currentTime = UIntToString_( nTime );
 	builder += currentTime;
 	return builder;
 }
@@ -158,7 +158,7 @@ void AbstractApplicationEnvironment::visit()
 	m_lastVisit = m_currentVisit;
 	m_pPreferences->put( IUsageReportPreferenceConstants::LAST_VISIT, m_lastVisit );
 	clock_t nTime = clock();
-	String currentTime = UIntToString( nTime );
+	String currentTime = UIntToString_( nTime );
 	m_currentVisit = currentTime;
 	m_visitCount++;
 	m_pPreferences->put( IUsageReportPreferenceConstants::VISIT_COUNT, m_visitCount );

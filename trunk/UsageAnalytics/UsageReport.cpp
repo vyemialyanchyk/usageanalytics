@@ -20,6 +20,7 @@
 #include "Tracker.h"
 #include "IApplicationEnvironment.h"
 #include "IGoogleAnalyticsParameters.h"
+#include "IApplicationPreferences.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -27,14 +28,19 @@
 
 UsageReport::UsageReport()
 {
-	m_pStopKaEnvironment = CUsageActivator::getInstance().getStopKaEnvironment();
+	UsageReport(0);
+}
+
+UsageReport::UsageReport( IApplicationPreferences* pAppPrefs ) : m_pAppPrefs(pAppPrefs)
+{
+	m_pStopKaEnvironment = CUsageActivator::getInstance().getStopKaEnvironment( m_pAppPrefs );
 	m_pApplicationEnvironment = CUsageActivator::getInstance().getApplicationEnvironment();
 	m_pGoogleAnalyticsParameters = CUsageActivator::getInstance().getGoogleAnalyticsParameters();
 	m_pFocusPoint = new SuffixFocusPoint( _T("StopKa"), m_pStopKaEnvironment->getStopKaVersion() );
 	IFocusPoint* pFocusPoint = 0;
 	pFocusPoint = m_pFocusPoint->setChild( new FocusPoint( _T("usageanalytics") ) );
-	pFocusPoint = pFocusPoint->setChild( new FocusPoint( _T("test") ) );
 	pFocusPoint = pFocusPoint->setChild( new FocusPoint( _T("startup") ) );
+	pFocusPoint = pFocusPoint->setChild( new FocusPoint( _T("1.5_110228") ) );
 }
 
 UsageReport::~UsageReport()

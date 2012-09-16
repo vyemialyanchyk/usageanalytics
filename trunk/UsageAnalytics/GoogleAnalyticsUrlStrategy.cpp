@@ -80,7 +80,7 @@ String GoogleAnalyticsUrlStrategy::getCookies()
 	param += m_pGoogleParameters->getFirstVisit() + IGoogleAnalyticsParameters::DOT;
 	param += m_pGoogleParameters->getLastVisit() + IGoogleAnalyticsParameters::DOT;
 	param += m_pGoogleParameters->getCurrentVisit() + IGoogleAnalyticsParameters::DOT;
-	param += UIntToString( m_pGoogleParameters->getVisitCount() );
+	param += UIntToString_( m_pGoogleParameters->getVisitCount() );
 	param += IGoogleAnalyticsParameters::SEMICOLON;
 	GoogleAnalyticsCookie gac1( IGoogleAnalyticsParameters::PARAM_COOKIES_UNIQUE_VISITOR_ID,
 		param, IGoogleAnalyticsParameters::PLUS_SIGN );
@@ -147,7 +147,7 @@ String GoogleAnalyticsUrlStrategy::getCookies()
 
 String GoogleAnalyticsUrlStrategy::getRandomNumber()
 {
-	return UIntToString( (unsigned int)( rand() ) );
+	return UIntToString_( (unsigned int)( rand() ) );
 }
 
 void GoogleAnalyticsUrlStrategy::appendParameter( const String& name, const String& val, String& builder )
