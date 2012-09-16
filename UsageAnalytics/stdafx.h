@@ -57,7 +57,7 @@ typedef String::value_type CharType;
 typedef StringA::value_type CharTypeA;
 typedef StringW::value_type CharTypeW;
 
-inline String UIntToString( unsigned int nNum )
+inline String UIntToString_( unsigned int nNum )
 {
 	CharType pstr[ 30 ];
 	_stprintf_s( pstr, 30, _T("%u"), nNum );
@@ -68,26 +68,26 @@ inline String UIntToString( unsigned int nNum )
 #undef max
 #endif
 
-inline unsigned int StrToUInt( const String& str )
+inline unsigned int StrToUInt_( const String& str )
 {
 	unsigned int nRet = std::numeric_limits<unsigned int>::max();
 	if( !_stscanf_s( str.c_str(), _T("%d"), &nRet ) ) nRet = std::numeric_limits<unsigned int>::max();
 	return nRet;
 }
 
-inline int CompareStrings( const String& str1, const String& str2 )
+inline int CompareStrings_( const String& str1, const String& str2 )
 {
 	return _tcscoll( str1.c_str(), str2.c_str() );
 	//return _tcscmp( str1.c_str(), str2.c_str() );
 }
 
-inline int CompareLowStrings( const String& str1, const String& str2 )
+inline int CompareLowStrings_( const String& str1, const String& str2 )
 {
 	return _tcsicoll( str1.c_str(), str2.c_str() );
 	//return _tcsicmp( str1.c_str(), str2.c_str() );
 }
 
-inline String GetToken( const String& strLine, String::size_type& start, const CharType delimiters[] )
+inline String GetToken_( const String& strLine, String::size_type& start, const CharType delimiters[] )
 {
 	if( start >= strLine.length() )
 	{
@@ -113,7 +113,7 @@ inline String GetToken( const String& strLine, String::size_type& start, const C
 	return strLine.substr( index1, index2 - index1 );
 }
 
-inline void Trim( String& strLine )
+inline void Trim_( String& strLine )
 {
 	const CharType delimiters[] = _T("\n\t\r\f\v ");
 	String::size_type indexFirst = strLine.find_first_not_of( delimiters );

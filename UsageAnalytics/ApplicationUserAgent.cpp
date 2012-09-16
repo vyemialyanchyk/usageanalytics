@@ -49,14 +49,10 @@ String CApplicationUserAgent::createBrowserLanguage()
 
 String CApplicationUserAgent::getNL()
 {
-	const size_t n = 1024;
-	String strLocaleName;
-	strLocaleName.reserve( n );
-	strLocaleName.resize( n );
+	CharType strLocaleName[ LOCALE_NAME_MAX_LENGTH ] = {0};
 	int i = 0;
-	if( i = ::GetUserDefaultLocaleName( const_cast<CharType*>( strLocaleName.c_str() ), n ) )
+	if( i = ::GetUserDefaultLocaleName( strLocaleName, LOCALE_NAME_MAX_LENGTH ) )
 	{
-		strLocaleName.resize( i );
 		return strLocaleName;
 	}
 	// return undef locale by default
@@ -122,7 +118,7 @@ String CApplicationUserAgent::getOSVersion()
 String CApplicationUserAgent::getUserAgentPattern( const String& os )
 {
 	String userAgentPattern( _T("") );
-	if( 0 == CompareLowStrings( os, _T("Windows") ) )
+	if( 0 == CompareLowStrings_( os, _T("Windows") ) )
 	{
 		return USERAGENT_WIN;
 	}

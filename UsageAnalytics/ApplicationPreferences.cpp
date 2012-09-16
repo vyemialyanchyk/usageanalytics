@@ -40,7 +40,7 @@ void ApplicationPreferences::cleanUp()
 
 bool ApplicationPreferences::setFilePath( const String& strFilePath )
 {
-	if( 0 == CompareLowStrings( m_strFilePath, strFilePath ) )
+	if( 0 == CompareLowStrings_( m_strFilePath, strFilePath ) )
 	{
 		return false;
 	}
@@ -51,12 +51,21 @@ bool ApplicationPreferences::setFilePath( const String& strFilePath )
 
 void ApplicationPreferences::put( const String& name, const String& val )
 {
-	m_mapPropVal.insert( std::pair<String, String>( name, val ) );
+	std::map<String, String>::iterator itEnd = m_mapPropVal.end();
+	std::map<String, String>::iterator it = m_mapPropVal.find( name.c_str() );
+	if( it == itEnd )
+	{
+		m_mapPropVal.insert( std::pair<String, String>( name, val ) );
+	}
+	else
+	{
+		it->second = val.c_str();
+	}
 }
 
 void ApplicationPreferences::put( const String& name, const unsigned long& val )
 {
-	put( name, UIntToString( val ) );
+	put( name, UIntToString_( val ) );
 }
 
 String ApplicationPreferences::get( const String& name, const String& defaultVal )
@@ -76,8 +85,8 @@ String ApplicationPreferences::get( const String& name )
 
 unsigned long ApplicationPreferences::getULong( const String& name, const unsigned long& defaultVal )
 {
-	const String strRes( get( name, UIntToString( defaultVal ) ) );
-	return StrToUInt( strRes );
+	const String strRes( get( name, UIntToString_( defaultVal ) ) );
+	return StrToUInt_( strRes );
 }
 
 void saveStringParam( CStdioFileEx& file, const String& name, const String& val )
@@ -122,10 +131,10 @@ bool ApplicationPreferences::fileLoad()
 		str = LPCTSTR( strTmp );
 		const CharType delimiters[] = _T("=");
 		String::size_type start = 0;
-		String strToken0 = GetToken( str, start, delimiters );
-		String strToken1 = GetToken( str, start, delimiters );
-		Trim( strToken0 );
-		Trim( strToken1 );
+		String strToken0 = GetToken_( str, start, delimiters );
+		String strToken1 = GetToken_( str, start, delimiters );
+		Trim_( strToken0 );
+		Trim_( strToken1 );
 		put( strToken0, strToken1 );
 	}
 	return true;

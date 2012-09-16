@@ -17,6 +17,7 @@ class IFocusPoint;
 class IStopKaEnvironment;
 class IApplicationEnvironment;
 class IGoogleAnalyticsParameters;
+class IApplicationPreferences;
 
 class UsageReport
 {
@@ -29,8 +30,11 @@ protected:
 	IApplicationEnvironment* m_pApplicationEnvironment;
 	//
 	IGoogleAnalyticsParameters* m_pGoogleAnalyticsParameters;
+	//
+	IApplicationPreferences* m_pAppPrefs;
 public:
 	UsageReport();
+	UsageReport( IApplicationPreferences* pAppPrefs );
 	virtual ~UsageReport();
 
 	void report()

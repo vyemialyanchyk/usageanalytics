@@ -42,29 +42,33 @@ CUsageActivator::~CUsageActivator()
 	}
 }
 
-IStopKaEnvironment* CUsageActivator::getStopKaEnvironment()
+IStopKaEnvironment* CUsageActivator::getStopKaEnvironment( IApplicationPreferences* pAppPrefs )
 {
 	if( m_pApplicationEnvironment == 0 )
 	{
-		ApplicationPreferences& ap = ApplicationPreferences::getInstance();
-		ap.setFilePath( _T("ap.txt") );
-		ap.fileLoad();
+		if( pAppPrefs == 0 )
+		{
+			ApplicationPreferences& ap = ApplicationPreferences::getInstance();
+			ap.setFilePath( _T("ap.txt") );
+			ap.fileLoad();
+			pAppPrefs = &( ap );
+		}
 		IUsageBranding* pBranding = getUsageBranding();
 		m_pApplicationEnvironment = new StopKaEnvironment(
-			pBranding->getGoogleAnalyticsAccount(), pBranding->getGoogleAnalyticsReportingHost(), &( ap ) );
+			pBranding->getGoogleAnalyticsAccount(), pBranding->getGoogleAnalyticsReportingHost(), pAppPrefs );
 	}
 	return dynamic_cast<IStopKaEnvironment*>( m_pApplicationEnvironment );
 }
 
-IApplicationEnvironment* CUsageActivator::getApplicationEnvironment()
+IApplicationEnvironment* CUsageActivator::getApplicationEnvironment( IApplicationPreferences* pAppPrefs )
 {
-	getStopKaEnvironment();
+	getStopKaEnvironment( pAppPrefs );
 	return m_pApplicationEnvironment;
 }
 
-IGoogleAnalyticsParameters* CUsageActivator::getGoogleAnalyticsParameters()
+IGoogleAnalyticsParameters* CUsageActivator::getGoogleAnalyticsParameters( IApplicationPreferences* pAppPrefs )
 {
-	getStopKaEnvironment();
+	getStopKaEnvironment( pAppPrefs );
 	return dynamic_cast<IGoogleAnalyticsParameters*>( m_pApplicationEnvironment );
 }
 

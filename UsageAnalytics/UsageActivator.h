@@ -17,6 +17,7 @@ class IApplicationEnvironment;
 class IUsageBranding;
 class IStopKaEnvironment;
 class IGoogleAnalyticsParameters;
+class IApplicationPreferences;
 
 class CUsageActivator
 {
@@ -34,11 +35,11 @@ public:
 		return _UsageActivator;
 	}
 	//
-	IStopKaEnvironment* getStopKaEnvironment();
+	IStopKaEnvironment* getStopKaEnvironment( IApplicationPreferences* pAppPrefs = 0 );
 	//
-	IApplicationEnvironment* getApplicationEnvironment();
+	IApplicationEnvironment* getApplicationEnvironment( IApplicationPreferences* pAppPrefs = 0 );
 	//
-	IGoogleAnalyticsParameters* getGoogleAnalyticsParameters();
+	IGoogleAnalyticsParameters* getGoogleAnalyticsParameters( IApplicationPreferences* pAppPrefs = 0 );
 	//
 	IUsageBranding* getUsageBranding();
 };
