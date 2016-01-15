@@ -4,7 +4,7 @@ The library was developed using C++ as a basic language. The main intention of t
 StopKa file manager & desktop search tool (http://www.stopka.us) is an example application which is track it's usage using the library.
 
 The library use example:
-
+```C++
 UINT UsageReportExec( LPVOID pParam )
 {
 #ifdef _USAGEANALYTICS
@@ -13,3 +13,4 @@ UINT UsageReportExec( LPVOID pParam )
 #endif
 	return 0;
 }
+```
