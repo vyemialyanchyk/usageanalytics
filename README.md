@@ -5,7 +5,7 @@ The project includes a sources of library that provide capability to anonymously
 usageanalytics => Automatically exported from code.google.com/p/usageanalytics
 
 library use example:
-
+```
 UsageReport::UsageReport( IApplicationPreferences* pAppPrefs ) : m_pAppPrefs(pAppPrefs)
 {
 	m_pStopKaEnvironment = CUsageActivator::getInstance().getStopKaEnvironment( m_pAppPrefs );
@@ -17,3 +17,4 @@ UsageReport::UsageReport( IApplicationPreferences* pAppPrefs ) : m_pAppPrefs(pAp
 	pFocusPoint = pFocusPoint->setChild( new FocusPoint( _T("startup") ) );
 	pFocusPoint = pFocusPoint->setChild( new FocusPoint( _T("1.5.0.160310") ) );
 }
+```
